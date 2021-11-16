@@ -8,13 +8,15 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "rosbag_recorder_node");
     ros::NodeHandle nh("~");
 
+    // Create an instance of this class
     BLOptions options;
 
-    //load param strings with no default value
+    // Load param strings with no default value
     if(!nh.getParam("configuration_directory", options.configuration_directory)) {
         ROS_ERROR("Unable to start Bag Recorder Node. No configuration directory supplied.");
         return 0;
     }
+
     if(!nh.getParam("data_directory", options.data_directory)) {
         ROS_ERROR("Unable to start Bag Recorder Node. No data directory supplied.");
         return 0;
@@ -46,6 +48,7 @@ int main(int argc, char** argv) {
     ROS_INFO("[Bag Recorder] Data directory located at %s.", options.data_directory.c_str());
     ROS_INFO("[Bag Recorder] Start Recording topic: %s.", options.record_start_topic.c_str());
     ROS_INFO("[Bag Recorder] Stop Recording topic: %s.", options.record_stop_topic.c_str());
+
     if(options.publish_name) {
         ROS_INFO("[Bag Recorder] Publishing bag names to %s.", options.name_topic.c_str());
     }
@@ -62,5 +65,4 @@ int main(int argc, char** argv) {
         bag_launcher.check_all();
         ros::spinOnce();
     }
-
 }

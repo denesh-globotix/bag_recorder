@@ -76,6 +76,8 @@ void BagLauncher::Start_Recording(const bag_recorder::Rosbag::ConstPtr& msg){
         return;
     }
 
+    std::cout << "This is the config: " << msg->config << std::endl;
+
     //start recording
     std::vector<std::string> topics;
     std::string full_bag_name = "";
